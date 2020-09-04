@@ -15,9 +15,14 @@ function Register(props) {
 
   const handleSubmit = async () => {
     toggleIsRegistering(true);
-    await register({ email, password, password2 }).then((res) =>
-      handleRegisterSuccess(res)
-    );
+    await register({ email, password, password2 })
+      .then((res) => handleRegisterSuccess(res))
+      .catch((error) => handleError(error));
+  };
+
+  const handleError = (error) => {
+    toggleIsRegistering(false);
+    alert(error);
   };
 
   const handleRegisterSuccess = (res) => {

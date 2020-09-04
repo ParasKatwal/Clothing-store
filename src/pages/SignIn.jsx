@@ -13,7 +13,14 @@ function SignIn(props) {
 
   const handleSubmit = async () => {
     toggleIsLogging(true);
-    await login({ email, password }).then((res) => handleLoginSuccess(res));
+    await login({ email, password })
+      .then((res) => handleLoginSuccess(res))
+      .catch((error) => handleError(error));
+  };
+
+  const handleError = (error) => {
+    toggleIsLogging(false);
+    alert(error);
   };
 
   const handleLoginSuccess = (res) => {
